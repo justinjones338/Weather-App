@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <link rel="stylesheet" href="/static/styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <title>{% block title %} {% endblock %}</title>
+    </head>
+    <body>
+        <div class="header">
+            <div class = "title-style">
+                <a href="/" class="disabled-link"> Weather App </a>
+            </div>
+            <div class="search-bar">
+                <form action="/weather" method="get">
+                    <input autocomplete="off" autofocus name="city" placeholder="Enter city name" type="text" class="search-bar">
+                    <button type="submit" >Enter</button>
+                </form>
+            </div>
+        </div>
+
+            {% block body %}{% endblock %}
+    </body>
+</html>

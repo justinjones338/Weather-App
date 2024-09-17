@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block title %} Weather Forecast {% endblock %}
+
+{% block body %}
+    <div class="introduction">
+        <div class="city">Hello, {{ city_name }}! Here is your latest weather update.</div>
+        <div>
+        <button class="right-header" id="light"> Light Mode</button>
+    </div>
+        </div>
+    <div class="temperature" id="temperature">
+        <img src="https://openweathermap.org/img/wn/{{ icon_code }}@2x.png" alt="Weather Logo" class="weather-logo"> {{ temperature }}&deg;F
+        </div>
+    <div class="data_under_temperature"> {{ forecast }}</div>
+    <div class="data_under_temperature">
+       <div id="temperature">Feels Like Temperature: {{ feels_like }}&degF</div>
+        <div>Wind speed: {{ wind_speed}} MPH</div>
+    </div>
+
+    <div class="weather-data">
+       <div class="weather-data-column">
+        <div class="weather-data-row"> Sunrise time:  {{ sunrise }} </div>
+        <div class="weather-data-row"> Sunset time:  {{ sunset }} </div>
+       </div>
+
+       <div class="weather-data-column">
+        <div class="weather-data-row"> Humidity {{ humidity }}% </div>
+        <div class="weather-data-row"> Level of cloudiness {{ cloudiness }}% </div>
+
+       </div>
+       <div class="weather-data-column">
+        <div class="weather-data-row"> Visibility: {{ visibility }} miles </div>
+        <div class="weather-data-row"> Pressure {{ pressure }} mm Hg </div>
+       </div>
+    </div>
+
+    <div class="futurecast-data">
+        <div class="futurecast-column">
+        <div class="futurecast-row">   {{ future_data[0].date }} </div>
+         <div class="futurecast-row"> <img src="https://openweathermap.org/img/wn/{{ future_data[0].icon_code }}@2x.png" alt="Weather Logo" class="futurecast-logo"> </div>
+         <div class="futurecast-row">  {{ future_data[0].temperature }}&degF </div>
+         <div class="futurecast-row"> {{ future_data[0].description }} </div>
+         <div class="futurecast-row"> Precipitation {{ future_data[0].precipitation }}% </div>
+        </div>
+
+        <div class="futurecast-column">
+            <div class="futurecast-row">   {{ future_data[1].date }} </div>
+            <div class="futurecast-row"> <img src="https://openweathermap.org/img/wn/{{ future_data[1].icon_code }}@2x.png" alt="Weather Logo" class="futurecast-logo"> </div>
+            <div class="futurecast-row">  {{ future_data[1].temperature }}&degF </div>
+            <div class="futurecast-row"> {{ future_data[1].description }} </div>
+            <div class="futurecast-row"> Precipitation {{ future_data[1].precipitation }}% </div>
+
+        </div>
+        <div class="futurecast-column">
+            <div class="futurecast-row">  {{ future_data[2].date }} </div>
+            <div class="futurecast-row"> <img src="https://openweathermap.org/img/wn/{{ future_data[2].icon_code }}@2x.png" alt="Weather Logo" class="futurecast-logo"> </div>
+            <div class="futurecast-row">  {{ future_data[2].temperature }}&degF </div>
+            <div class="futurecast-row"> {{ future_data[2].description }} </div>
+            <div class="futurecast-row"> Precipitation {{ future_data[2].precipitation }}% </div>
+        </div>
+     </div>
+
+     <button id="toggleButton"> Show full futurecast </button>
+     <div class="table-wrapper">
+     <table id="weather-table" class="table-futurecast">
+        <thead>
+            <th> Time </th>
+            <th> Temperature </th>
+            <th> Description </th>
+            <th> Precipitation </th>
+            <th> Wind Speed </th>
+        </thead>
+        <tbody>
+            {% for row in future_data %}
+            <tr>
+                <td>{{ row.date }}</td>
+                <td id="units">{{ row.temperature }}&deg;F</td>
+                <td><img src="https://openweathermap.org/img/wn/{{ row.icon_code }}@2x.png" alt="Weather Logo" class="futurecast-logo"> <br> {{ row.description }}</td>
+                <td>{{ row.precipitation }}%</td>
+                <td>{{ row.wind_speed }} MPH</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+    </div>
+
+{% endblock %}
